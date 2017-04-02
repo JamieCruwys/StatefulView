@@ -1,4 +1,4 @@
-package com.example.statefulview;
+package com.example.statefulview.example;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
