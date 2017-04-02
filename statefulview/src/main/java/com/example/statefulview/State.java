@@ -28,7 +28,7 @@ public enum State
     /**
      * No internet connection
      */
-    NO_INTERNET("noInternet");
+    OFFLINE("offline");
 
     private String name;
 
