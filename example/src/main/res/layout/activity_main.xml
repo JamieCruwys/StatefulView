@@ -1,8 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.statefulview.StatefulView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-/>
+    android:orientation="vertical"
+>
+    <com.example.statefulview.StatefulView
+        android:id="@+id/stateful_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        custom:contentLayout="@layout/content"
+        custom:emptyLayout="@layout/empty"
+        custom:errorLayout="@layout/error"
+        custom:loadingLayout="@layout/loading"
+        custom:offlineLayout="@layout/disconnected"
+    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    >
+        <Button
+            android:id="@+id/contentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Content"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+        >
+            <Button
+                android:id="@+id/loadingButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Loading"
+            />
+
+            <Button
+                android:id="@+id/emptyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Empty"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+        >
+            <Button
+                android:id="@+id/errorButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Error"
+            />
+
+            <Button
+                android:id="@+id/offlineButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Offline"
+            />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
