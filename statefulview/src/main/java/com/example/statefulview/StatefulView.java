@@ -25,9 +25,9 @@ public class StatefulView extends ViewFlipper
 
         try
         {
+            loadingLayout = attributes.getResourceId(R.styleable.StatefulView_loadingLayout, 0);
             contentLayout = attributes.getResourceId(R.styleable.StatefulView_contentLayout, 0);
             emptyLayout = attributes.getResourceId(R.styleable.StatefulView_emptyLayout, 0);
-            loadingLayout = attributes.getResourceId(R.styleable.StatefulView_loadingLayout, 0);
             errorLayout = attributes.getResourceId(R.styleable.StatefulView_errorLayout, 0);
             offlineLayout = attributes.getResourceId(R.styleable.StatefulView_offlineLayout, 0);
         }
@@ -36,9 +36,9 @@ public class StatefulView extends ViewFlipper
             attributes.recycle();
         }
 
+        attemptLayoutInflation(context, loadingLayout, State.LOADING);
         attemptLayoutInflation(context, contentLayout, State.SHOWING_CONTENT);
         attemptLayoutInflation(context, emptyLayout, State.EMPTY);
-        attemptLayoutInflation(context, loadingLayout, State.LOADING);
         attemptLayoutInflation(context, errorLayout, State.ERROR);
         attemptLayoutInflation(context, offlineLayout, State.OFFLINE);
     }
@@ -64,15 +64,15 @@ public class StatefulView extends ViewFlipper
     {
         switch (state)
         {
-            case SHOWING_CONTENT:
+            case LOADING:
                 setDisplayedChild(0);
                 break;
 
-            case EMPTY:
+            case SHOWING_CONTENT:
                 setDisplayedChild(1);
                 break;
 
-            case LOADING:
+            case EMPTY:
                 setDisplayedChild(2);
                 break;
 
