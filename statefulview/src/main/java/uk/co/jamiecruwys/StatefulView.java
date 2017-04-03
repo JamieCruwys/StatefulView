@@ -1,4 +1,4 @@
-package com.example.statefulview;
+package uk.co.jamiecruwys;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -20,16 +20,16 @@ public class StatefulView extends ViewFlipper
     {
         super(context, attrs);
 
-        TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.StatefulView, 0, 0);
+        TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, uk.co.jamiecruwys.statefulview.R.styleable.StatefulView, 0, 0);
         int contentLayout, emptyLayout, loadingLayout, errorLayout, offlineLayout;
 
         try
         {
-            loadingLayout = attributes.getResourceId(R.styleable.StatefulView_loadingLayout, 0);
-            contentLayout = attributes.getResourceId(R.styleable.StatefulView_contentLayout, 0);
-            emptyLayout = attributes.getResourceId(R.styleable.StatefulView_emptyLayout, 0);
-            errorLayout = attributes.getResourceId(R.styleable.StatefulView_errorLayout, 0);
-            offlineLayout = attributes.getResourceId(R.styleable.StatefulView_offlineLayout, 0);
+            loadingLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_loadingLayout, 0);
+            contentLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_contentLayout, 0);
+            emptyLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_emptyLayout, 0);
+            errorLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_errorLayout, 0);
+            offlineLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_offlineLayout, 0);
         }
         finally
         {
