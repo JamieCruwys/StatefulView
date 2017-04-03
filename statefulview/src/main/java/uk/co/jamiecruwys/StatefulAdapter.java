@@ -9,20 +9,13 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
  */
 public abstract class StatefulAdapter<VH extends ViewHolder> extends RecyclerView.Adapter<VH>
 {
-	private AdapterStateListener stateListener;
-
-	public StatefulAdapter()
+	public void setStateListener(@NonNull final AdapterStateListener stateListener)
 	{
 		registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
 		{
 			@Override public void onChanged()
 			{
 				super.onChanged();
-
-				if (stateListener == null)
-				{
-					return;
-				}
 
 				if (getItemCount() == 0)
 				{
@@ -34,10 +27,5 @@ public abstract class StatefulAdapter<VH extends ViewHolder> extends RecyclerVie
 				}
 			}
 		});
-	}
-
-	public void setStateListener(@NonNull AdapterStateListener stateListener)
-	{
-		this.stateListener = stateListener;
 	}
 }
