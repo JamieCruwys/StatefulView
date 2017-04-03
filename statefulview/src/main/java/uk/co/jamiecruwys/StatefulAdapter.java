@@ -1,5 +1,6 @@
 package uk.co.jamiecruwys;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 /**
@@ -7,8 +8,23 @@ import android.support.v7.widget.RecyclerView;
  */
 public abstract class StatefulAdapter extends RecyclerView.Adapter
 {
-	public boolean isEmpty()
+	public StatefulAdapter(@NonNull final StatefulView statefulView)
 	{
-		return getItemCount() == 0;
+		registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
+		{
+			@Override public void onChanged()
+			{
+				super.onChanged();
+
+				if (getItemCount() == 0)
+				{
+					statefulView.setState(State.EMPTY);
+				}
+				else
+				{
+					statefulView.setState(State.SHOWING_CONTENT);
+				}
+			}
+		});
 	}
 }
