@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ViewFlipper;
 
@@ -16,7 +17,7 @@ import android.widget.ViewFlipper;
  */
 public class StatefulView extends ViewFlipper
 {
-    public StatefulView(Context context, AttributeSet attrs)
+    public StatefulView(@NonNull Context context, AttributeSet attrs)
     {
         super(context, attrs);
 
@@ -43,7 +44,7 @@ public class StatefulView extends ViewFlipper
         attemptLayoutInflation(context, offlineLayout, State.OFFLINE);
     }
 
-    private void attemptLayoutInflation(Context context, int layoutId, @NonNull State state)
+    private void attemptLayoutInflation(@NonNull Context context, int layoutId, @NonNull State state)
     {
         try
         {
@@ -51,8 +52,7 @@ public class StatefulView extends ViewFlipper
         }
         catch (Resources.NotFoundException e)
         {
-            String resourceEntryName = context.getResources().getResourceEntryName(getId());
-            throw new RuntimeException(StatefulView.class.getSimpleName() + " with id " + resourceEntryName + ", must have custom attribute " + state.getName() + "Layout set");
+			throw new RuntimeException(StatefulView.class.getSimpleName() + ", must have custom attribute " + state.getName() + "Layout set");
         }
     }
 
