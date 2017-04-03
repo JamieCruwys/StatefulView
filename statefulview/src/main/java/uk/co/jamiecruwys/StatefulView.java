@@ -52,7 +52,7 @@ public class StatefulView extends ViewFlipper
         }
         catch (Resources.NotFoundException e)
         {
-			throw new RuntimeException(StatefulView.class.getSimpleName() + ", must have custom attribute " + state.getName() + "Layout set");
+			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getName() + "Layout set");
         }
     }
 
