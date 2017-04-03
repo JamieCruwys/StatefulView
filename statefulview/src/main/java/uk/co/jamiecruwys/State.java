@@ -1,4 +1,4 @@
-package com.example.statefulview;
+package uk.co.jamiecruwys;
 
 /**
  * Enum for common states that the view can be in

@@ -3,8 +3,8 @@ package com.example.statefulview.example;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.statefulview.State;
-import com.example.statefulview.StatefulView;
+import uk.co.jamiecruwys.State;
+import uk.co.jamiecruwys.StatefulView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
