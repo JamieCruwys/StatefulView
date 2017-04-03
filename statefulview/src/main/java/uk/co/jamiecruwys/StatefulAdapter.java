@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
  */
 public abstract class StatefulAdapter extends RecyclerView.Adapter
 {
-	public StatefulAdapter(@NonNull final StatefulView statefulView)
+	private AdapterStateListener stateListener;
+
+	public StatefulAdapter()
 	{
 		registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
 		{
@@ -16,15 +18,25 @@ public abstract class StatefulAdapter extends RecyclerView.Adapter
 			{
 				super.onChanged();
 
+				if (stateListener == null)
+				{
+					return;
+				}
+
 				if (getItemCount() == 0)
 				{
-					statefulView.setState(State.EMPTY);
+					stateListener.onEmpty();
 				}
 				else
 				{
-					statefulView.setState(State.SHOWING_CONTENT);
+					stateListener.onFilled();
 				}
 			}
 		});
+	}
+
+	public void setStateListener(@NonNull AdapterStateListener stateListener)
+	{
+		this.stateListener = stateListener;
 	}
 }
