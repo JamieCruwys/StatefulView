@@ -14,7 +14,6 @@
         custom:emptyLayout="@layout/empty"
         custom:errorLayout="@layout/error"
         custom:loadingLayout="@layout/loading"
-        custom:offlineLayout="@layout/offline"
     />
 
     <LinearLayout

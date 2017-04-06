@@ -44,9 +44,4 @@ public class ViewExampleActivity extends AppCompatActivity
     {
         statefulView.setState(State.ERROR);
     }
-
-    @OnClick(R.id.offlineButton) void onOfflineState()
-    {
-        statefulView.setState(State.OFFLINE);
-    }
 }

@@ -25,10 +25,4 @@
 		android:title="Error State"
 		app:showAsAction="collapseActionView"
 	/>
-
-	<item
-		android:id="@+id/menu_offline"
-		android:title="Offline State"
-		app:showAsAction="collapseActionView"
-	/>
 </menu>

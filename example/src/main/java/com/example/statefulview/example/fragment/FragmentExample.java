@@ -36,11 +36,6 @@ public class FragmentExample extends StatefulFragment
 		return R.layout.error;
 	}
 
-	@Override protected int provideOfflineLayout()
-	{
-		return R.layout.offline;
-	}
-
 	@Override public void onCreate(@Nullable Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -71,10 +66,6 @@ public class FragmentExample extends StatefulFragment
 
 			case R.id.menu_error:
 				setState(State.ERROR);
-				break;
-
-			case R.id.menu_offline:
-				setState(State.OFFLINE);
 				break;
 		}
 
