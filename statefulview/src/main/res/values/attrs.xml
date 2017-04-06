@@ -5,6 +5,5 @@
         <attr name="contentLayout" format="reference" />
         <attr name="emptyLayout" format="reference" />
         <attr name="errorLayout" format="reference" />
-        <attr name="offlineLayout" format="reference" />
     </declare-styleable>
 </resources>

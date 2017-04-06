@@ -27,21 +27,19 @@ public class StatefulView extends ViewFlipper
 	private static final int CONTENT_INDEX = 1;
 	private static final int EMPTY_INDEX = 2;
 	private static final int ERROR_INDEX = 3;
-	private static final int OFFLINE_INDEX = 4;
 
 	public StatefulView(@NonNull Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 
 		TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, uk.co.jamiecruwys.statefulview.R.styleable.StatefulView, 0, 0);
-		int contentLayout, emptyLayout, loadingLayout, errorLayout, offlineLayout;
+		int contentLayout, emptyLayout, loadingLayout, errorLayout;
 
 		// Create a view placeholder for each one
 		attemptHolderLayoutInflation(context, R.layout.holder, State.LOADING);
 		attemptHolderLayoutInflation(context, R.layout.holder, State.SHOWING_CONTENT);
 		attemptHolderLayoutInflation(context, R.layout.holder, State.EMPTY);
 		attemptHolderLayoutInflation(context, R.layout.holder, State.ERROR);
-		attemptHolderLayoutInflation(context, R.layout.holder, State.OFFLINE);
 
 		try
 		{
@@ -49,7 +47,6 @@ public class StatefulView extends ViewFlipper
 			contentLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_contentLayout, 0);
 			emptyLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_emptyLayout, 0);
 			errorLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_errorLayout, 0);
-			offlineLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_offlineLayout, 0);
 		}
 		finally
 		{
@@ -75,11 +72,6 @@ public class StatefulView extends ViewFlipper
 		{
 			setErrorLayout(context, errorLayout);
 		}
-
-		if (offlineLayout != 0)
-		{
-			setOfflineLayout(context, offlineLayout);
-		}
 	}
 
 	public void setContentLayout(@NonNull Context context, @LayoutRes int layout)
@@ -100,11 +92,6 @@ public class StatefulView extends ViewFlipper
 	public void setErrorLayout(@NonNull Context context, @LayoutRes int layout)
 	{
 		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(ERROR_INDEX), State.ERROR);
-	}
-
-	public void setOfflineLayout(@NonNull Context context, @LayoutRes int layout)
-	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(OFFLINE_INDEX), State.OFFLINE);
 	}
 
 	private void attemptHolderLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull State state)
@@ -154,10 +141,6 @@ public class StatefulView extends ViewFlipper
 			default:
 			case ERROR:
 				setDisplayedChild(ERROR_INDEX);
-				break;
-
-			case OFFLINE:
-				setDisplayedChild(OFFLINE_INDEX);
 				break;
 		}
 	}

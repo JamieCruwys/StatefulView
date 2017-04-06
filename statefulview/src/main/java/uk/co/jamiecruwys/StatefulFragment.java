@@ -23,8 +23,6 @@ public abstract class StatefulFragment extends Fragment
 
 	@LayoutRes protected abstract int provideErrorLayout();
 
-	@LayoutRes protected abstract int provideOfflineLayout();
-
 	protected StatefulView statefulView;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -35,7 +33,6 @@ public abstract class StatefulFragment extends Fragment
 		statefulView.setEmptyLayout(getContext(), provideEmptyLayout());
 		statefulView.setLoadingLayout(getContext(), provideLoadingLayout());
 		statefulView.setErrorLayout(getContext(), provideErrorLayout());
-		statefulView.setOfflineLayout(getContext(), provideOfflineLayout());
 
 		return statefulView;
 	}

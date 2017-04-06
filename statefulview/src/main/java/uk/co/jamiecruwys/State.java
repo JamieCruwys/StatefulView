@@ -23,12 +23,7 @@ public enum State
     /**
      * Failed to retrieve content
      */
-    ERROR("error"),
-
-    /**
-     * No internet connection
-     */
-    OFFLINE("offline");
+    ERROR("error");
 
     private String name;
 
