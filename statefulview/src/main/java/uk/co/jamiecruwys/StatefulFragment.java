@@ -1,6 +1,7 @@
 package uk.co.jamiecruwys;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -23,11 +24,30 @@ public abstract class StatefulFragment extends Fragment
 
 	@LayoutRes protected abstract int provideErrorLayout();
 
+	/**
+	 * Override this if you want to provide your own layout which contains a {@link StatefulView}
+	 * @return
+	 */
+	@LayoutRes protected int provideLayout()
+	{
+		return R.layout.main_stateful_fragment;
+	}
+
+	/**
+	 * Override this if you are providing your own custom layout. If you are then you need to override this and provide the id of the {@link StatefulView}
+	 * @return
+	 */
+	@IdRes protected int provideStatefulViewId()
+	{
+		return R.id.statefulview;
+	}
+
 	protected StatefulView statefulView;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		statefulView = (StatefulView)inflater.inflate(R.layout.main_stateful_fragment, container, false);
+		View view = inflater.inflate(provideLayout(), container, false);
+		statefulView = (StatefulView)view.findViewById(provideStatefulViewId());
 
 		statefulView.setContentLayout(getContext(), provideContentLayout());
 		statefulView.setEmptyLayout(getContext(), provideEmptyLayout());
