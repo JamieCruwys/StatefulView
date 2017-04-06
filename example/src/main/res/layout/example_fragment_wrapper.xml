@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:id="@+id/channel_fragment"
-	android:name="com.example.statefulview.example.MainFragment"
-	tools:context="com.example.statefulview.example.FragmentExampleActivity"
+	android:name="com.example.statefulview.example.fragment.FragmentExample"
+	tools:context="com.example.statefulview.example.fragment.FragmentExampleActivity"
 	tools:ignore="MergeRootFrame"
 />

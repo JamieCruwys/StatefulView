@@ -1,4 +1,4 @@
-package com.example.statefulview.example;
+package com.example.statefulview.example.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,17 +6,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.statefulview.example.R;
+
 import uk.co.jamiecruwys.State;
 import uk.co.jamiecruwys.StatefulFragment;
 
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 06/04/2017.
  */
-public class MainFragment extends StatefulFragment
+public class FragmentExample extends StatefulFragment
 {
 	@Override protected int provideContentLayout()
 	{
-		return R.layout.activity_main;
+		return R.layout.example_view;
 	}
 
 	@Override protected int provideEmptyLayout()

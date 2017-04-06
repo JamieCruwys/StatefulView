@@ -1,7 +1,9 @@
-package com.example.statefulview.example;
+package com.example.statefulview.example.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.statefulview.example.R;
 
 import uk.co.jamiecruwys.State;
 import uk.co.jamiecruwys.StatefulView;
@@ -10,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity
+public class ViewExampleActivity extends AppCompatActivity
 {
     @BindView(R.id.stateful_view)
     StatefulView statefulView;
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.example_view);
         ButterKnife.bind(this);
     }
 
