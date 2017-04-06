@@ -1,8 +1,10 @@
-package uk.co.jamiecruwys;
+package uk.co.jamiecruwys.recycler;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+
+import uk.co.jamiecruwys.recycler.AdapterStateListener;
 
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 03/04/2017.
