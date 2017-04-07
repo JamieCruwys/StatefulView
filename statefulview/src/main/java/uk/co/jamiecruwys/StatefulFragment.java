@@ -9,26 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import uk.co.jamiecruwys.interfaces.StateChange;
+import uk.co.jamiecruwys.interfaces.StateLayouts;
+import uk.co.jamiecruwys.interfaces.StateRootLayout;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 06/04/2017.
  */
-public abstract class StatefulFragment extends Fragment
+public abstract class StatefulFragment extends Fragment implements StateLayouts, StateRootLayout, StateChange
 {
-	@LayoutRes protected abstract int provideContentLayout();
-
-	@LayoutRes protected abstract int provideEmptyLayout();
-
-	@LayoutRes protected abstract int provideLoadingLayout();
-
-	@LayoutRes protected abstract int provideErrorLayout();
-
 	/**
 	 * Override this if you want to provide your own layout which contains a {@link StatefulView}
 	 * @return
 	 */
-	@LayoutRes protected int provideLayout()
+	@LayoutRes public int provideLayout()
 	{
 		return R.layout.stateful_fragment;
 	}
@@ -37,7 +32,7 @@ public abstract class StatefulFragment extends Fragment
 	 * Override this if you are providing your own custom layout. If you are then you need to override this and provide the id of the {@link StatefulView}
 	 * @return
 	 */
-	@IdRes protected int provideStatefulViewId()
+	@IdRes public int provideStatefulViewId()
 	{
 		return R.id.statefulview;
 	}
