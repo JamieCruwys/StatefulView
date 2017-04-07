@@ -54,7 +54,7 @@ public abstract class StatefulFragment extends Fragment
 		statefulView.setLoadingLayout(getContext(), provideLoadingLayout());
 		statefulView.setErrorLayout(getContext(), provideErrorLayout());
 
-		return statefulView;
+		return view;
 	}
 
 	public void setState(@NonNull State state)
