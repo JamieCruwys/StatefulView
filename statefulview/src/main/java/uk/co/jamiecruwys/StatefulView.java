@@ -5,10 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ViewFlipper;
 
@@ -36,10 +33,10 @@ public class StatefulView extends ViewFlipper
 		int contentLayout, emptyLayout, loadingLayout, errorLayout;
 
 		// Create a view placeholder for each one
-		attemptHolderLayoutInflation(context, R.layout.holder, State.LOADING);
-		attemptHolderLayoutInflation(context, R.layout.holder, State.SHOWING_CONTENT);
-		attemptHolderLayoutInflation(context, R.layout.holder, State.EMPTY);
-		attemptHolderLayoutInflation(context, R.layout.holder, State.ERROR);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.LOADING);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.SHOWING_CONTENT);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.EMPTY);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.ERROR);
 
 		try
 		{
