@@ -30,7 +30,7 @@ public abstract class StatefulFragment extends Fragment
 	 */
 	@LayoutRes protected int provideLayout()
 	{
-		return R.layout.main_stateful_fragment;
+		return R.layout.stateful_fragment;
 	}
 
 	/**
