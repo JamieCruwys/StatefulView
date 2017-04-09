@@ -38,7 +38,7 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 	 */
 	@Override public int provideLayout()
 	{
-		return R.layout.stateful_activity;
+		return R.layout.stateful_view;
 	}
 
 	/**

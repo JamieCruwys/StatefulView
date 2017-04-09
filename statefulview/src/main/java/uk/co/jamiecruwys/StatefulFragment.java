@@ -41,7 +41,7 @@ public abstract class StatefulFragment extends Fragment implements ViewStateLayo
 	 */
 	@Override public int provideLayout()
 	{
-		return R.layout.stateful_fragment;
+		return R.layout.stateful_view;
 	}
 
 	/**

@@ -35,7 +35,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 	{
 		for (ViewState state : ViewState.values())
 		{
-			attemptLayoutInflation(context, R.layout.stateful_view_holder, this, state);
+			attemptLayoutInflation(context, R.layout.stateful_stub, this, state);
 		}
 	}
 
