@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ViewFlipper;
 
-import uk.co.jamiecruwys.interfaces.ViewStateChange;
+import uk.co.jamiecruwys.contracts.ViewStateChange;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**

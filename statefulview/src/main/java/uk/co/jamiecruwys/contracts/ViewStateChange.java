@@ -1,4 +1,4 @@
-package uk.co.jamiecruwys.interfaces;
+package uk.co.jamiecruwys.contracts;
 
 import android.support.annotation.NonNull;
 

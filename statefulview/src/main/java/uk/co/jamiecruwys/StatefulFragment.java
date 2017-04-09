@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uk.co.jamiecruwys.interfaces.ViewStateChange;
-import uk.co.jamiecruwys.interfaces.ViewStateLayouts;
-import uk.co.jamiecruwys.interfaces.ViewStateRootLayout;
+import uk.co.jamiecruwys.contracts.ViewStateChange;
+import uk.co.jamiecruwys.contracts.ViewStateLayouts;
+import uk.co.jamiecruwys.contracts.ViewStateRootLayout;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
