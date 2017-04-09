@@ -6,13 +6,13 @@ import android.support.annotation.LayoutRes;
 import uk.co.jamiecruwys.StatefulView;
 
 /**
- * Created by Jamie Cruwys of 3 SIDED CUBE on 07/04/2017.
+ * Contract for providing a root layout that a {@link StatefulView} is a child view in
  */
 public interface StateRootLayout
 {
 	/**
-	 * Override this if you want to provide your own layout which contains a {@link StatefulView}
-	 * @return
+	 * Provide the layout resource for this fragment/activity, that contains a {@link StatefulView}
+	 * @return layout resource for this fragment/activity
 	 */
 	@LayoutRes int provideLayout();
 

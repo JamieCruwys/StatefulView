@@ -5,14 +5,13 @@ import android.support.annotation.NonNull;
 import uk.co.jamiecruwys.State;
 
 /**
- * Created by Jamie Cruwys of 3 SIDED CUBE on 07/04/2017.
+ * Contract for transitioning between states
  */
 public interface StateChange
 {
 	/**
-	 * Sets the state of the view, which in turn updates the layout to be reflective of the new state
-	 *
-	 * @param state that the view is now in
+	 * Sets the new view state to transition to
+	 * @param state which it is transitioning to
 	 */
 	void setState(@NonNull State state);
 }
