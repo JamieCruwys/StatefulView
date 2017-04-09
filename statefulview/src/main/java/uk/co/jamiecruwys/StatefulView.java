@@ -33,9 +33,9 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 	 */
 	private void createViewStubs(@NonNull Context context)
 	{
-		for (ViewState viewState : ViewState.values())
+		for (ViewState state : ViewState.values())
 		{
-			attemptLayoutInflation(context, R.layout.stateful_view_holder, this, viewState);
+			attemptLayoutInflation(context, R.layout.stateful_view_holder, this, state);
 		}
 	}
 
@@ -46,10 +46,10 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 	{
 		TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, uk.co.jamiecruwys.statefulview.R.styleable.StatefulView, 0, 0);
 
-		for (ViewState viewState : ViewState.values())
+		for (ViewState state : ViewState.values())
 		{
-			int layout = attributes.getResourceId(viewState.getStyleableAttr(), DEFAULT_LAYOUT_VALUE);
-			setStateLayout(context, layout, viewState);
+			int layout = attributes.getResourceId(state.getStyleableAttr(), DEFAULT_LAYOUT_VALUE);
+			setStateLayout(context, layout, state);
 		}
 
 		attributes.recycle();
@@ -92,7 +92,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 		}
 		catch (Resources.NotFoundException e)
 		{
-			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getName() + "Layout set");
+			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getAttributeName() + " set");
 		}
 	}
 
