@@ -27,7 +27,7 @@ public class ViewExampleActivity extends AppCompatActivity
 
     @OnClick(R.id.contentButton) void onShowingContentState()
     {
-        statefulView.setViewState(ViewState.SHOWING_CONTENT);
+        statefulView.setViewState(ViewState.LOADED);
     }
 
     @OnClick(R.id.emptyButton) void onEmptyState()

@@ -8,10 +8,10 @@ import android.support.annotation.LayoutRes;
 public interface ViewStateLayouts
 {
 	/**
-	 * Provide the layout resource for the SHOWING_CONTENT state
-	 * @return layout resource for the SHOWING_CONTENT state
+	 * Provide the layout resource for the LOADING state
+	 * @return layout resource for the LOADING state
 	 */
-	@LayoutRes int provideContentLayout();
+	@LayoutRes int provideLoadingLayout();
 
 	/**
 	 * Provide the layout resource for the EMPTY state
@@ -20,10 +20,10 @@ public interface ViewStateLayouts
 	@LayoutRes int provideEmptyLayout();
 
 	/**
-	 * Provide the layout resource for the LOADING state
-	 * @return layout resource for the LOADING state
+	 * Provide the layout resource for the LOADED state
+	 * @return layout resource for the LOADED state
 	 */
-	@LayoutRes int provideLoadingLayout();
+	@LayoutRes int provideLoadedLayout();
 
 	/**
 	 * Provide the layout resource for the ERROR state

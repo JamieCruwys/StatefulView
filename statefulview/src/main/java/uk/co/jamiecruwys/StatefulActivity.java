@@ -43,7 +43,7 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 		setContentView(provideLayout());
 		statefulView = (StatefulView)findViewById(provideStatefulViewId());
 
-		statefulView.setContentLayout(this, provideContentLayout());
+		statefulView.setContentLayout(this, provideLoadedLayout());
 		statefulView.setEmptyLayout(this, provideEmptyLayout());
 		statefulView.setLoadingLayout(this, provideLoadingLayout());
 		statefulView.setErrorLayout(this, provideErrorLayout());

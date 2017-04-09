@@ -16,7 +16,7 @@ import uk.co.jamiecruwys.StatefulFragment;
  */
 public class FragmentExample extends StatefulFragment
 {
-	@Override protected int provideContentLayout()
+	@Override protected int provideLoadedLayout()
 	{
 		return R.layout.example_view;
 	}
@@ -53,7 +53,7 @@ public class FragmentExample extends StatefulFragment
 		switch (item.getItemId())
 		{
 			case R.id.menu_content:
-				setViewState(ViewState.SHOWING_CONTENT);
+				setViewState(ViewState.LOADED);
 				break;
 
 			case R.id.menu_empty:

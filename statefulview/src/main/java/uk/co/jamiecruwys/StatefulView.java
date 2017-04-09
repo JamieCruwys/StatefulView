@@ -35,7 +35,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 
 		// Create a view placeholder for each one
 		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.LOADING);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.SHOWING_CONTENT);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.LOADED);
 		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.EMPTY);
 		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.ERROR);
 
@@ -74,7 +74,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 
 	public void setContentLayout(@NonNull Context context, @LayoutRes int layout)
 	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(CONTENT_INDEX), ViewState.SHOWING_CONTENT);
+		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(CONTENT_INDEX), ViewState.LOADED);
 	}
 
 	public void setEmptyLayout(@NonNull Context context, @LayoutRes int layout)
@@ -128,7 +128,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 				setDisplayedChild(LOADING_INDEX);
 				break;
 
-			case SHOWING_CONTENT:
+			case LOADED:
 				setDisplayedChild(CONTENT_INDEX);
 				break;
 

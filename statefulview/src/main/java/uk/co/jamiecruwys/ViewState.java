@@ -5,20 +5,20 @@ package uk.co.jamiecruwys;
  */
 public enum ViewState
 {
-    /**
-	 * Loaded one or more pieces of content
-     */
-    SHOWING_CONTENT("content"),
+	/**
+	 * Loading content
+	 */
+	LOADING("loading"),
 
 	/**
 	 * Loaded, but has no content
 	 */
-    EMPTY("empty"),
+	EMPTY("empty"),
 
-	/**
-	 * Loading content
-	 */
-    LOADING("loading"),
+    /**
+	 * Loaded one or more pieces of content
+     */
+    LOADED("loaded"),
 
 	/**
 	 * Error while loading content

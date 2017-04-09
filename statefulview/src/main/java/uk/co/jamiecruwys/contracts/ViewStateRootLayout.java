@@ -17,8 +17,8 @@ public interface ViewStateRootLayout
 	@LayoutRes int provideLayout();
 
 	/**
-	 * Override this if you are providing your own custom layout. If you are then you need to override this and provide the id of the {@link StatefulView}
-	 * @return
+	 * Provide the layout id of the {@link StatefulView} in the layout resource provided by {@link #provideLayout()}
+	 * @return layout id of the {@link StatefulView} in the layout resource provided by {@link #provideLayout()}
 	 */
 	@IdRes int provideStatefulViewId();
 }

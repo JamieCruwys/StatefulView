@@ -44,7 +44,7 @@ public abstract class StatefulFragment extends Fragment implements ViewStateLayo
 		View view = inflater.inflate(provideLayout(), container, false);
 		statefulView = (StatefulView)view.findViewById(provideStatefulViewId());
 
-		statefulView.setContentLayout(getContext(), provideContentLayout());
+		statefulView.setContentLayout(getContext(), provideLoadedLayout());
 		statefulView.setEmptyLayout(getContext(), provideEmptyLayout());
 		statefulView.setLoadingLayout(getContext(), provideLoadingLayout());
 		statefulView.setErrorLayout(getContext(), provideErrorLayout());
