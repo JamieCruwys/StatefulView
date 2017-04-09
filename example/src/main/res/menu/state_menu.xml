@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-	xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 >
 	<item
 		android:id="@+id/menu_loading"
@@ -9,14 +10,14 @@
 	/>
 
 	<item
-		android:id="@+id/menu_content"
-		android:title="Content State"
+		android:id="@+id/menu_empty"
+		android:title="Empty State"
 		app:showAsAction="collapseActionView"
 	/>
 
 	<item
-		android:id="@+id/menu_empty"
-		android:title="Empty State"
+		android:id="@+id/menu_loaded"
+		android:title="Loaded State"
 		app:showAsAction="collapseActionView"
 	/>
 
