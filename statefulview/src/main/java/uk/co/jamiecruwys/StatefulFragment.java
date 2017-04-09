@@ -1,8 +1,6 @@
 package uk.co.jamiecruwys;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,43 +13,50 @@ import uk.co.jamiecruwys.contracts.ViewStateRootLayout;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
- * Created by Jamie Cruwys of 3 SIDED CUBE on 06/04/2017.
+ * A fragment that contains a {@link StatefulView}
  */
 public abstract class StatefulFragment extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange
 {
-	/**
-	 * Override this if you want to provide your own layout which contains a {@link StatefulView}
-	 * @return
-	 */
-	@LayoutRes public int provideLayout()
-	{
-		return R.layout.stateful_fragment;
-	}
-
-	/**
-	 * Override this if you are providing your own custom layout. If you are then you need to override this and provide the id of the {@link StatefulView}
-	 * @return
-	 */
-	@IdRes public int provideStatefulViewId()
-	{
-		return R.id.statefulview;
-	}
-
 	protected StatefulView statefulView;
 
+	/**
+	 * Sets up the stateful view inside this fragment
+	 */
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(provideLayout(), container, false);
 		statefulView = (StatefulView)view.findViewById(provideStatefulViewId());
 
-		statefulView.setContentLayout(getContext(), provideLoadedLayout());
-		statefulView.setEmptyLayout(getContext(), provideEmptyLayout());
-		statefulView.setLoadingLayout(getContext(), provideLoadingLayout());
-		statefulView.setErrorLayout(getContext(), provideErrorLayout());
+		statefulView.setStateLayout(getContext(), provideLoadingLayout(), ViewState.LOADING);
+		statefulView.setStateLayout(getContext(), provideEmptyLayout(), ViewState.EMPTY);
+		statefulView.setStateLayout(getContext(), provideLoadedLayout(), ViewState.LOADED);
+		statefulView.setStateLayout(getContext(), provideErrorLayout(), ViewState.ERROR);
 
 		return view;
 	}
 
+	/**
+	 * Provides a default layout for this fragment
+	 * @return default layout resource for this fragment
+	 */
+	@Override public int provideLayout()
+	{
+		return R.layout.stateful_fragment;
+	}
+
+	/**
+	 * Provides the id of the {@link StatefulView} in the default layout for this fragment
+	 * @return layout id of the {@link StatefulView} in the default layout for this fragment
+	 */
+	@Override public int provideStatefulViewId()
+	{
+		return R.id.statefulview;
+	}
+
+	/**
+	 * Sets the new view state to transition to
+	 * @param state which it is transitioning to
+	 */
 	public void setViewState(@NonNull ViewState state)
 	{
 		statefulView.setViewState(state);
