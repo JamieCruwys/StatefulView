@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.example.statefulview.example.R;
 
-import uk.co.jamiecruwys.State;
+import uk.co.jamiecruwys.ViewState;
 import uk.co.jamiecruwys.StatefulFragment;
 
 /**
@@ -53,19 +53,19 @@ public class FragmentExample extends StatefulFragment
 		switch (item.getItemId())
 		{
 			case R.id.menu_content:
-				setState(State.SHOWING_CONTENT);
+				setViewState(ViewState.SHOWING_CONTENT);
 				break;
 
 			case R.id.menu_empty:
-				setState(State.EMPTY);
+				setViewState(ViewState.EMPTY);
 				break;
 
 			case R.id.menu_loading:
-				setState(State.LOADING);
+				setViewState(ViewState.LOADING);
 				break;
 
 			case R.id.menu_error:
-				setState(State.ERROR);
+				setViewState(ViewState.ERROR);
 				break;
 		}
 

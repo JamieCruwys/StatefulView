@@ -14,7 +14,7 @@ import uk.co.jamiecruwys.statefulview.R;
 
 /**
  * Removes the need for hiding/showing views when the view's state changes.
- * Call {@link #setState(State)} with the new {@link State} that the view is in and it will change to the relevant layout.
+ * Call {@link #setViewState(ViewState)} with the new {@link ViewState} that the view is in and it will change to the relevant layout.
  * <p>
  * You *must* set all of the relevant custom attributes on each {@link StatefulView}, otherwise it will throw an error at runtime.
  * This is so that missing states can be flagged as early as possible.
@@ -34,10 +34,10 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 		int contentLayout, emptyLayout, loadingLayout, errorLayout;
 
 		// Create a view placeholder for each one
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.LOADING);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.SHOWING_CONTENT);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.EMPTY);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, State.ERROR);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.LOADING);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.SHOWING_CONTENT);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.EMPTY);
+		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.ERROR);
 
 		try
 		{
@@ -74,30 +74,30 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 
 	public void setContentLayout(@NonNull Context context, @LayoutRes int layout)
 	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(CONTENT_INDEX), State.SHOWING_CONTENT);
+		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(CONTENT_INDEX), ViewState.SHOWING_CONTENT);
 	}
 
 	public void setEmptyLayout(@NonNull Context context, @LayoutRes int layout)
 	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(EMPTY_INDEX), State.EMPTY);
+		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(EMPTY_INDEX), ViewState.EMPTY);
 	}
 
 	public void setLoadingLayout(@NonNull Context context, @LayoutRes int layout)
 	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(LOADING_INDEX), State.LOADING);
+		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(LOADING_INDEX), ViewState.LOADING);
 	}
 
 	public void setErrorLayout(@NonNull Context context, @LayoutRes int layout)
 	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(ERROR_INDEX), State.ERROR);
+		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(ERROR_INDEX), ViewState.ERROR);
 	}
 
-	private void attemptHolderLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull State state)
+	private void attemptHolderLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull ViewState viewState)
 	{
-		attemptLayoutInflation(context, layoutId, this, state);
+		attemptLayoutInflation(context, layoutId, this, viewState);
 	}
 
-	private void attemptLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull ViewGroup root, @NonNull State state)
+	private void attemptLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull ViewGroup root, @NonNull ViewState viewState)
 	{
 		// Clear all subviews inside the view holder
 		if (root != this)
@@ -111,16 +111,16 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 		}
 		catch (Resources.NotFoundException e)
 		{
-			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getName() + "Layout set");
+			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + viewState.getName() + "Layout set");
 		}
 	}
 
 	/**
-	 * Sets the state of the view, which in turn updates the layout to be reflective of the new state
+	 * Sets the viewState of the view, which in turn updates the layout to be reflective of the new viewState
 	 *
 	 * @param state that the view is now in
 	 */
-	public void setState(@NonNull State state)
+	public void setViewState(@NonNull ViewState state)
 	{
 		switch (state)
 		{

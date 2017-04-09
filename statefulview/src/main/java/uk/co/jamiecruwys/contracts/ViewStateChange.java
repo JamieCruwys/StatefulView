@@ -2,7 +2,7 @@ package uk.co.jamiecruwys.contracts;
 
 import android.support.annotation.NonNull;
 
-import uk.co.jamiecruwys.State;
+import uk.co.jamiecruwys.ViewState;
 
 /**
  * Contract for transitioning between states
@@ -13,5 +13,5 @@ public interface ViewStateChange
 	 * Sets the new view state to transition to
 	 * @param state which it is transitioning to
 	 */
-	void setState(@NonNull State state);
+	void setViewState(@NonNull ViewState state);
 }

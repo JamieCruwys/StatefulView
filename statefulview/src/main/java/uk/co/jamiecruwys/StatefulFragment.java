@@ -52,8 +52,8 @@ public abstract class StatefulFragment extends Fragment implements ViewStateLayo
 		return view;
 	}
 
-	public void setState(@NonNull State state)
+	public void setViewState(@NonNull ViewState state)
 	{
-		statefulView.setState(state);
+		statefulView.setViewState(state);
 	}
 }

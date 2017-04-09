@@ -49,8 +49,8 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 		statefulView.setErrorLayout(this, provideErrorLayout());
 	}
 
-	public void setState(@NonNull State state)
+	public void setViewState(@NonNull ViewState state)
 	{
-		statefulView.setState(state);
+		statefulView.setViewState(state);
 	}
 }
