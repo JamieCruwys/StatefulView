@@ -7,7 +7,7 @@ import uk.co.jamiecruwys.State;
 /**
  * Contract for transitioning between states
  */
-public interface StateChange
+public interface ViewStateChange
 {
 	/**
 	 * Sets the new view state to transition to

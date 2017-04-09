@@ -9,15 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uk.co.jamiecruwys.interfaces.StateChange;
-import uk.co.jamiecruwys.interfaces.StateLayouts;
-import uk.co.jamiecruwys.interfaces.StateRootLayout;
+import uk.co.jamiecruwys.interfaces.ViewStateChange;
+import uk.co.jamiecruwys.interfaces.ViewStateLayouts;
+import uk.co.jamiecruwys.interfaces.ViewStateRootLayout;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 06/04/2017.
  */
-public abstract class StatefulFragment extends Fragment implements StateLayouts, StateRootLayout, StateChange
+public abstract class StatefulFragment extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange
 {
 	/**
 	 * Override this if you want to provide your own layout which contains a {@link StatefulView}

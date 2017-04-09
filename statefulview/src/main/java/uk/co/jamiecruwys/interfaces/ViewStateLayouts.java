@@ -5,7 +5,7 @@ import android.support.annotation.LayoutRes;
 /**
  * Contract for providing layouts for all states
  */
-public interface StateLayouts
+public interface ViewStateLayouts
 {
 	/**
 	 * Provide the layout resource for the SHOWING_CONTENT state

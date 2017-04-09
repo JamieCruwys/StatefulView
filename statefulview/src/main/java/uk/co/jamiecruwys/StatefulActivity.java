@@ -7,15 +7,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import uk.co.jamiecruwys.interfaces.StateChange;
-import uk.co.jamiecruwys.interfaces.StateLayouts;
-import uk.co.jamiecruwys.interfaces.StateRootLayout;
+import uk.co.jamiecruwys.interfaces.ViewStateChange;
+import uk.co.jamiecruwys.interfaces.ViewStateLayouts;
+import uk.co.jamiecruwys.interfaces.ViewStateRootLayout;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 07/04/2017.
  */
-public abstract class StatefulActivity extends AppCompatActivity implements StateLayouts, StateRootLayout, StateChange
+public abstract class StatefulActivity extends AppCompatActivity implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange
 {
 	/**
 	 * Override this if you want to provide your own layout which contains a {@link StatefulView}

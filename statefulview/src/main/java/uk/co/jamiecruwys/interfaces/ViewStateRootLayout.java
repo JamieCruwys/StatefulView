@@ -8,7 +8,7 @@ import uk.co.jamiecruwys.StatefulView;
 /**
  * Contract for providing a root layout that a {@link StatefulView} is a child view in
  */
-public interface StateRootLayout
+public interface ViewStateRootLayout
 {
 	/**
 	 * Provide the layout resource for this fragment/activity, that contains a {@link StatefulView}

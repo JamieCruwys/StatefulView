@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ViewFlipper;
 
-import uk.co.jamiecruwys.interfaces.StateChange;
+import uk.co.jamiecruwys.interfaces.ViewStateChange;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
@@ -19,7 +19,7 @@ import uk.co.jamiecruwys.statefulview.R;
  * You *must* set all of the relevant custom attributes on each {@link StatefulView}, otherwise it will throw an error at runtime.
  * This is so that missing states can be flagged as early as possible.
  */
-public class StatefulView extends ViewFlipper implements StateChange
+public class StatefulView extends ViewFlipper implements ViewStateChange
 {
 	private static final int LOADING_INDEX = 0;
 	private static final int CONTENT_INDEX = 1;
