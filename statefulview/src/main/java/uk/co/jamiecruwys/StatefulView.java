@@ -13,133 +13,95 @@ import uk.co.jamiecruwys.contracts.ViewStateChange;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
- * Removes the need for hiding/showing views when the view's state changes.
- * Call {@link #setViewState(ViewState)} with the new {@link ViewState} that the view is in and it will change to the relevant layout.
- * <p>
- * You *must* set all of the relevant custom attributes on each {@link StatefulView}, otherwise it will throw an error at runtime.
- * This is so that missing states can be flagged as early as possible.
+ * A view that removes the need to show/hide views in order to
+ * change between view states such as loading, loaded, empty and error.
  */
 public class StatefulView extends ViewFlipper implements ViewStateChange
 {
-	private static final int LOADING_INDEX = 0;
-	private static final int CONTENT_INDEX = 1;
-	private static final int EMPTY_INDEX = 2;
-	private static final int ERROR_INDEX = 3;
+	private static final int DEFAULT_LAYOUT_VALUE = 0;
 
 	public StatefulView(@NonNull Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 
+		createViewStubs(context);
+		initialiseFromAttributes(context, attrs);
+	}
+
+	/**
+	 * Creates a view stub for each {@link ViewState}
+	 */
+	private void createViewStubs(@NonNull Context context)
+	{
+		for (ViewState viewState : ViewState.values())
+		{
+			attemptLayoutInflation(context, R.layout.stateful_view_holder, this, viewState);
+		}
+	}
+
+	/**
+	 * Initialises the layouts from any attributes that were set
+	 */
+	private void initialiseFromAttributes(@NonNull Context context, AttributeSet attrs)
+	{
 		TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, uk.co.jamiecruwys.statefulview.R.styleable.StatefulView, 0, 0);
-		int contentLayout, emptyLayout, loadingLayout, errorLayout;
 
-		// Create a view placeholder for each one
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.LOADING);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.LOADED);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.EMPTY);
-		attemptHolderLayoutInflation(context, R.layout.stateful_view_holder, ViewState.ERROR);
-
-		try
+		for (ViewState viewState : ViewState.values())
 		{
-			loadingLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_loadingLayout, 0);
-			contentLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_contentLayout, 0);
-			emptyLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_emptyLayout, 0);
-			errorLayout = attributes.getResourceId(uk.co.jamiecruwys.statefulview.R.styleable.StatefulView_errorLayout, 0);
-		}
-		finally
-		{
-			attributes.recycle();
+			int layout = attributes.getResourceId(viewState.getStyleableAttr(), DEFAULT_LAYOUT_VALUE);
+			setStateLayout(context, layout, viewState);
 		}
 
-		if (loadingLayout != 0)
-		{
-			setLoadingLayout(context, loadingLayout);
-		}
+		attributes.recycle();
+	}
 
-		if (contentLayout != 0)
+	/**
+	 * Sets the layout for a given {@link ViewState}
+	 * @param context necessary to inflate the layout
+	 * @param layout to inflate
+	 * @param state the layout is for
+	 */
+	public void setStateLayout(@NonNull Context context, @LayoutRes int layout, @NonNull ViewState state)
+	{
+		if (layout != DEFAULT_LAYOUT_VALUE)
 		{
-			setContentLayout(context, contentLayout);
-		}
-
-		if (emptyLayout != 0)
-		{
-			setEmptyLayout(context, emptyLayout);
-		}
-
-		if (errorLayout != 0)
-		{
-			setErrorLayout(context, errorLayout);
+			attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(state.getPosition()), state);
 		}
 	}
 
-	public void setContentLayout(@NonNull Context context, @LayoutRes int layout)
+	/**
+	 * Try and inflate the view for the given state
+	 * @param context necessary to inflate the layout
+	 * @param layout to inflate
+	 * @param root view
+	 * @param state the layout is for
+	 */
+	private void attemptLayoutInflation(@NonNull Context context, @LayoutRes int layout, @NonNull ViewGroup root, @NonNull ViewState state)
 	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(CONTENT_INDEX), ViewState.LOADED);
-	}
+		boolean inViewStub = root != this;
 
-	public void setEmptyLayout(@NonNull Context context, @LayoutRes int layout)
-	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(EMPTY_INDEX), ViewState.EMPTY);
-	}
-
-	public void setLoadingLayout(@NonNull Context context, @LayoutRes int layout)
-	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(LOADING_INDEX), ViewState.LOADING);
-	}
-
-	public void setErrorLayout(@NonNull Context context, @LayoutRes int layout)
-	{
-		attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(ERROR_INDEX), ViewState.ERROR);
-	}
-
-	private void attemptHolderLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull ViewState viewState)
-	{
-		attemptLayoutInflation(context, layoutId, this, viewState);
-	}
-
-	private void attemptLayoutInflation(@NonNull Context context, @LayoutRes int layoutId, @NonNull ViewGroup root, @NonNull ViewState viewState)
-	{
-		// Clear all subviews inside the view holder
-		if (root != this)
+		// Clear all of the views for this layout's state. Do nothing if we are inflating the initial stub layouts.
+		if (inViewStub)
 		{
 			root.removeAllViews();
 		}
 
 		try
 		{
-			inflate(context, layoutId, root);
+			inflate(context, layout, root);
 		}
 		catch (Resources.NotFoundException e)
 		{
-			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + viewState.getName() + "Layout set");
+			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getName() + "Layout set");
 		}
 	}
 
 	/**
-	 * Sets the viewState of the view, which in turn updates the layout to be reflective of the new viewState
-	 *
-	 * @param state that the view is now in
+	 * Sets the new view state to transition to
+	 * @param state which it is transitioning to
 	 */
 	public void setViewState(@NonNull ViewState state)
 	{
-		switch (state)
-		{
-			case LOADING:
-				setDisplayedChild(LOADING_INDEX);
-				break;
-
-			case LOADED:
-				setDisplayedChild(CONTENT_INDEX);
-				break;
-
-			case EMPTY:
-				setDisplayedChild(EMPTY_INDEX);
-				break;
-
-			default:
-			case ERROR:
-				setDisplayedChild(ERROR_INDEX);
-				break;
-		}
+		setDisplayedChild(state.getPosition());
 	}
 }
