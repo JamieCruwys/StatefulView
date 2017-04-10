@@ -20,7 +20,8 @@ import uk.co.jamiecruwys.statefulview.R;
 public abstract class StatefulListingFragment extends StatefulFragment implements ListingData
 {
 	private RecyclerView recycler;
-	private StatefulAdapter adapter;
+	private RecyclerView.Adapter adapter;
+	private StatefulDataObserver dataObserver;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -45,6 +46,8 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 			{
 				recycler.addItemDecoration(itemDecoration);
 			}
+
+			dataObserver = new StatefulDataObserver(adapter, this);
 		}
 	}
 
@@ -64,9 +67,9 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 
 	/**
 	 * Provide the adapter to use for the listing
-	 * @return {@link StatefulAdapter} to use for the listing
+	 * @return {@link RecyclerView.Adapter} to use for the listing
 	 */
-	@NonNull protected abstract StatefulAdapter provideAdapter();
+	@NonNull protected abstract RecyclerView.Adapter provideAdapter();
 
 	/**
 	 * Provide any item decoration you want applied to the listing
@@ -80,7 +83,8 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 	@Override public void onResume()
 	{
 		super.onResume();
-		adapter.registerStatefulDataObserver();
+
+		adapter.registerAdapterDataObserver(dataObserver);
 
 		if (shouldReloadOnResume())
 		{
@@ -105,7 +109,7 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 
 	@Override public void onListingDataRetrieved(@NonNull List<?> items)
 	{
-		adapter.setItems(items);
+		setViewState(ViewState.LOADED);
 	}
 
 	@Override public void onListingDataError(@Nullable Throwable throwable)
@@ -116,6 +120,6 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 	@Override public void onPause()
 	{
 		super.onPause();
-		adapter.unregisterStatefulDataObserver();
+		adapter.unregisterAdapterDataObserver(dataObserver);
 	}
 }
