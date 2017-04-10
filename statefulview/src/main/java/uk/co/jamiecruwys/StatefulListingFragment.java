@@ -19,7 +19,7 @@ import uk.co.jamiecruwys.statefulview.R;
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 10/04/2017.
  */
-public abstract class StatefulListingFragment extends StatefulFragment implements ListingData
+public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment implements ListingData<ITEM_TYPE>
 {
 	private RecyclerView recycler;
 	private RecyclerView.Adapter adapter;
@@ -72,7 +72,7 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 	 * @param items to seed the adapter with
 	 * @return {@link RecyclerView.Adapter} to use for the listing
 	 */
-	@NonNull protected abstract RecyclerView.Adapter provideAdapter(@NonNull List<?> items);
+	@NonNull protected abstract RecyclerView.Adapter provideAdapter(@NonNull List<ITEM_TYPE> items);
 
 	/**
 	 * Provide any item decoration you want applied to the listing
@@ -110,7 +110,7 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 	 */
 	protected abstract void getListData(@NonNull ListingData callback);
 
-	@Override public void onListingDataRetrieved(@NonNull List<?> items)
+	@Override public void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items)
 	{
 		adapter = provideAdapter(items);
 		recycler.swapAdapter(adapter, false);

@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * Contract for returning data to the listing
  */
-public interface ListingData
+public interface ListingData<ITEM_TYPE>
 {
 	/**
 	 * Successfully retrieved content
 	 * @param items that were retrieved
 	 */
-	void onListingDataRetrieved(@NonNull List<?> items);
+	void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items);
 
 	/**
 	 * Failed to retrieve content
