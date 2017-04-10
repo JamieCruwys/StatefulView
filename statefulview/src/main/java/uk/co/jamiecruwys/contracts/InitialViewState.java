@@ -9,6 +9,7 @@ public interface InitialViewState
 {
 	/**
 	 * Provide the initial state that this view should be in
+	 *
 	 * @return
 	 */
 	ViewState provideInitialViewState();

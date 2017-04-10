@@ -56,6 +56,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	/**
 	 * Provide the layout manager to use for the listing
+	 *
 	 * @return {@link android.support.v7.widget.RecyclerView.LayoutManager} to use for the listing
 	 */
 	@NonNull protected RecyclerView.LayoutManager provideLayoutManager()
@@ -65,13 +66,16 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	/**
 	 * Provide the adapter to use for the listing
+	 *
 	 * @param items to seed the adapter with
+	 *
 	 * @return {@link RecyclerView.Adapter} to use for the listing
 	 */
 	@NonNull protected abstract RecyclerView.Adapter provideAdapter(@NonNull List<ITEM_TYPE> items);
 
 	/**
 	 * Provide any item decoration you want applied to the listing
+	 *
 	 * @return {@link android.support.v7.widget.RecyclerView.ItemDecoration} you want applied to the listing
 	 */
 	@Nullable protected RecyclerView.ItemDecoration provideItemDecoration()
@@ -92,6 +96,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	/**
 	 * Whether or not content should be reloaded when the view is resumed
+	 *
 	 * @return true to reload content on resume, false to not reload content
 	 */
 	protected boolean shouldReloadOnResume()

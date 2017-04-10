@@ -57,6 +57,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 
 	/**
 	 * Sets the layout for a given {@link ViewState}
+	 *
 	 * @param context necessary to inflate the layout
 	 * @param layout to inflate
 	 * @param state the layout is for
@@ -71,6 +72,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 
 	/**
 	 * Try and inflate the view for the given state
+	 *
 	 * @param context necessary to inflate the layout
 	 * @param layout to inflate
 	 * @param root view
@@ -98,6 +100,7 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 
 	/**
 	 * Sets the new view state to transition to
+	 *
 	 * @param state which it is transitioning to
 	 */
 	public void setViewState(@NonNull ViewState state)

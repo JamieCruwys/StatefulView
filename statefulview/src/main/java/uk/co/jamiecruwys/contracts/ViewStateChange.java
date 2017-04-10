@@ -11,6 +11,7 @@ public interface ViewStateChange
 {
 	/**
 	 * Sets the new view state to transition to
+	 *
 	 * @param state which it is transitioning to
 	 */
 	void setViewState(@NonNull ViewState state);

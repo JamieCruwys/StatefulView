@@ -37,6 +37,7 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 
 	/**
 	 * Provides a default layout for this fragment
+	 *
 	 * @return default layout resource for this fragment
 	 */
 	@Override public int provideLayout()
@@ -46,6 +47,7 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 
 	/**
 	 * Provides the id of the {@link StatefulView} in the default layout for this fragment
+	 *
 	 * @return layout id of the {@link StatefulView} in the default layout for this fragment
 	 */
 	@Override public int provideStatefulViewId()
@@ -55,6 +57,7 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 
 	/**
 	 * Sets the new view state to transition to
+	 *
 	 * @param state which it is transitioning to
 	 */
 	public void setViewState(@NonNull ViewState state)

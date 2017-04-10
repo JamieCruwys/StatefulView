@@ -21,20 +21,20 @@ public enum ViewState
 	 */
 	EMPTY(1, R.styleable.StatefulView_emptyLayout, "emptyLayout"),
 
-    /**
+	/**
 	 * Loaded one or more pieces of content
-     */
-    LOADED(2, R.styleable.StatefulView_loadedLayout, "loadedLayout"),
+	 */
+	LOADED(2, R.styleable.StatefulView_loadedLayout, "loadedLayout"),
 
 	/**
 	 * Error while loading content
 	 */
-    ERROR(3, R.styleable.StatefulView_errorLayout, "errorLayout");
+	ERROR(3, R.styleable.StatefulView_errorLayout, "errorLayout");
 
 	/**
 	 * Position in the order of inflating layouts. Values for this should start at 0 and increase by 1 every time.
 	 */
-	@IntRange(from=0) private int position;
+	@IntRange(from = 0) private int position;
 
 	/**
 	 * The styleable resource attribute for this view, derived from attrs.xml
@@ -46,14 +46,14 @@ public enum ViewState
 	 */
 	@NonNull private String attributeName;
 
-    ViewState(@IntRange(from=0) int position, @StyleableRes int styleableAttr, @NonNull String attributeName)
-    {
+	ViewState(@IntRange(from = 0) int position, @StyleableRes int styleableAttr, @NonNull String attributeName)
+	{
 		this.position = position;
 		this.styleableAttr = styleableAttr;
-        this.attributeName = attributeName;
-    }
+		this.attributeName = attributeName;
+	}
 
-	@IntRange(from=0) public int getPosition()
+	@IntRange(from = 0) public int getPosition()
 	{
 		return position;
 	}
@@ -63,8 +63,8 @@ public enum ViewState
 		return styleableAttr;
 	}
 
-    @NonNull public String getAttributeName()
-    {
-        return attributeName;
-    }
+	@NonNull public String getAttributeName()
+	{
+		return attributeName;
+	}
 }
