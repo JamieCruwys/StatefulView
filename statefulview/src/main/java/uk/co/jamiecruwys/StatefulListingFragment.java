@@ -123,9 +123,9 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 		setViewState(ViewState.ERROR);
 	}
 
-	@Override public void onPause()
-	{
-		super.onPause();
-		adapter.unregisterAdapterDataObserver(dataObserver);
-	}
+//	@Override public void onPause()
+//	{
+//		super.onPause();
+//		adapter.unregisterAdapterDataObserver(dataObserver);
+//	}
 }
