@@ -4,6 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 
+import java.util.Collection;
+import java.util.List;
+
 import uk.co.jamiecruwys.contracts.ViewStateChange;
 
 /**
@@ -14,6 +17,7 @@ import uk.co.jamiecruwys.contracts.ViewStateChange;
 public abstract class StatefulAdapter<VH extends ViewHolder> extends RecyclerView.Adapter<VH>
 {
 	@NonNull private ViewStateChange callback;
+	@NonNull private Collection items;
 
 	private RecyclerView.AdapterDataObserver statefulDataObserver = new RecyclerView.AdapterDataObserver()
 	{
@@ -32,8 +36,9 @@ public abstract class StatefulAdapter<VH extends ViewHolder> extends RecyclerVie
 		}
 	};
 
-	public StatefulAdapter(@NonNull ViewStateChange callback)
+	public StatefulAdapter(@NonNull List<?> items, @NonNull ViewStateChange callback)
 	{
+		this.items = items;
 		this.callback = callback;
 	}
 
@@ -51,5 +56,17 @@ public abstract class StatefulAdapter<VH extends ViewHolder> extends RecyclerVie
 	public void unregisterStatefulDataObserver()
 	{
 		unregisterAdapterDataObserver(statefulDataObserver);
+	}
+
+	/**
+	 * Replaces existing items with a new set of items
+	 * @param newItems to replace the existing items
+	 */
+	public void setItems(@NonNull Collection newItems)
+	{
+		items.clear();
+		items.addAll(newItems);
+
+		notifyDataSetChanged();
 	}
 }
