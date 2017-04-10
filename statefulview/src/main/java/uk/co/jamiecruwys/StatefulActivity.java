@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import uk.co.jamiecruwys.contracts.InitialViewState;
 import uk.co.jamiecruwys.contracts.ViewStateChange;
 import uk.co.jamiecruwys.contracts.ViewStateLayouts;
 import uk.co.jamiecruwys.contracts.ViewStateRootLayout;
@@ -13,7 +14,7 @@ import uk.co.jamiecruwys.statefulview.R;
 /**
  * A activity that contains a {@link StatefulView}
  */
-public abstract class StatefulActivity extends AppCompatActivity implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange
+public abstract class StatefulActivity extends AppCompatActivity implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange, InitialViewState
 {
 	protected StatefulView statefulView;
 
@@ -57,5 +58,10 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 	public void setViewState(@NonNull ViewState state)
 	{
 		statefulView.setViewState(state);
+	}
+
+	@Override public ViewState provideInitialViewState()
+	{
+		return ViewState.LOADING;
 	}
 }

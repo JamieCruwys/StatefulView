@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import uk.co.jamiecruwys.contracts.InitialViewState;
 import uk.co.jamiecruwys.contracts.ViewStateChange;
 import uk.co.jamiecruwys.contracts.ViewStateLayouts;
 import uk.co.jamiecruwys.contracts.ViewStateRootLayout;
@@ -15,7 +16,7 @@ import uk.co.jamiecruwys.statefulview.R;
 /**
  * A fragment that contains a {@link StatefulView}
  */
-public abstract class StatefulFragment extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange
+public abstract class StatefulFragment extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange, InitialViewState
 {
 	protected StatefulView statefulView;
 
@@ -60,5 +61,10 @@ public abstract class StatefulFragment extends Fragment implements ViewStateLayo
 	public void setViewState(@NonNull ViewState state)
 	{
 		statefulView.setViewState(state);
+	}
+
+	@Override public ViewState provideInitialViewState()
+	{
+		return ViewState.LOADING;
 	}
 }
