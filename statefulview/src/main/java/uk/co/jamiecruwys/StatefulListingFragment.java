@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import uk.co.jamiecruwys.contracts.ListingData;
+import uk.co.jamiecruwys.contracts.ListingSetters;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
@@ -67,9 +68,10 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 
 	/**
 	 * Provide the adapter to use for the listing
+	 * @param items to seed the adapter with
 	 * @return {@link RecyclerView.Adapter} to use for the listing
 	 */
-	@NonNull protected abstract RecyclerView.Adapter provideAdapter();
+	@NonNull protected abstract RecyclerView.Adapter provideAdapter(@NonNull List<?> items);
 
 	/**
 	 * Provide any item decoration you want applied to the listing
@@ -109,6 +111,9 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 
 	@Override public void onListingDataRetrieved(@NonNull List<?> items)
 	{
+		adapter = provideAdapter(items);
+		recycler.swapAdapter(adapter, false);
+
 		setViewState(ViewState.LOADED);
 	}
 
