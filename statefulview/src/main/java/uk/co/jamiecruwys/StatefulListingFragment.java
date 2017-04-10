@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Collections;
 import java.util.List;
 
 import uk.co.jamiecruwys.contracts.ListingData;
@@ -39,7 +40,7 @@ public abstract class StatefulListingFragment extends StatefulFragment implement
 		{
 			recycler.setLayoutManager(provideLayoutManager());
 
-			adapter = provideAdapter();
+			adapter = provideAdapter(Collections.EMPTY_LIST);
 			recycler.setAdapter(adapter);
 
 			RecyclerView.ItemDecoration itemDecoration = provideItemDecoration();
