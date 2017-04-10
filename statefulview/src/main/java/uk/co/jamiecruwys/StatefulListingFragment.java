@@ -23,7 +23,6 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 {
 	private RecyclerView recycler;
 	private RecyclerView.Adapter adapter;
-	private StatefulDataObserver dataObserver;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
