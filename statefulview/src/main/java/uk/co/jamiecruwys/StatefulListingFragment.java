@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 
 import uk.co.jamiecruwys.contracts.ListingData;
-import uk.co.jamiecruwys.contracts.ListingSetters;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
