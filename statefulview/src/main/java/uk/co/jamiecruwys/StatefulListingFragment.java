@@ -112,15 +112,15 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	@Override public void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items)
 	{
-		adapter = provideAdapter(items);
-		recycler.swapAdapter(adapter, false);
-
 		if (items.isEmpty())
 		{
 			setViewState(ViewState.EMPTY);
 		}
 		else
 		{
+			adapter = provideAdapter(items);
+			recycler.swapAdapter(adapter, false);
+			
 			setViewState(ViewState.LOADED);
 		}
 	}
