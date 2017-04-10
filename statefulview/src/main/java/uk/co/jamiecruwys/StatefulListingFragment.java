@@ -48,8 +48,6 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 			{
 				recycler.addItemDecoration(itemDecoration);
 			}
-
-			dataObserver = new StatefulDataObserver(adapter, this);
 		}
 	}
 
@@ -87,8 +85,6 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 	{
 		super.onResume();
 
-		adapter.registerAdapterDataObserver(dataObserver);
-
 		if (shouldReloadOnResume())
 		{
 			setViewState(ViewState.LOADING);
@@ -120,7 +116,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 		{
 			adapter = provideAdapter(items);
 			recycler.swapAdapter(adapter, false);
-			
+
 			setViewState(ViewState.LOADED);
 		}
 	}
@@ -129,10 +125,4 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 	{
 		setViewState(ViewState.ERROR);
 	}
-
-//	@Override public void onPause()
-//	{
-//		super.onPause();
-//		adapter.unregisterAdapterDataObserver(dataObserver);
-//	}
 }
