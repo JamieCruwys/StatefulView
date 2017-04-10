@@ -65,6 +65,6 @@ public abstract class StatefulFragment extends Fragment implements ViewStateLayo
 
 	@Override public ViewState provideInitialViewState()
 	{
-		return ViewState.LOADING;
+		return ViewState.EMPTY;
 	}
 }

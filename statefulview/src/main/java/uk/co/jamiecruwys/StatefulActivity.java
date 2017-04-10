@@ -62,6 +62,6 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 
 	@Override public ViewState provideInitialViewState()
 	{
-		return ViewState.LOADING;
+		return ViewState.EMPTY;
 	}
 }
