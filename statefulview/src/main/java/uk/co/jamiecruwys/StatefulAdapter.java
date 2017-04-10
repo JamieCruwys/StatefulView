@@ -17,7 +17,7 @@ import uk.co.jamiecruwys.contracts.ViewStateChange;
 public abstract class StatefulAdapter<VH extends ViewHolder> extends RecyclerView.Adapter<VH>
 {
 	@NonNull private ViewStateChange callback;
-	@NonNull private Collection items;
+	@NonNull protected Collection items;
 
 	private RecyclerView.AdapterDataObserver statefulDataObserver = new RecyclerView.AdapterDataObserver()
 	{
