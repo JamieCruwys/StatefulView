@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import uk.co.jamiecruwys.contracts.InitialViewState;
+import uk.co.jamiecruwys.contracts.ListingData;
 import uk.co.jamiecruwys.contracts.ViewStateChange;
 import uk.co.jamiecruwys.contracts.ViewStateLayouts;
 import uk.co.jamiecruwys.contracts.ViewStateRootLayout;
@@ -17,7 +20,7 @@ import uk.co.jamiecruwys.statefulview.R;
 /**
  * A fragment that contains a {@link StatefulView}
  */
-public abstract class StatefulFragment extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange, InitialViewState
+public abstract class StatefulFragment<ITEM_TYPE> extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange, InitialViewState, ListingData<ITEM_TYPE>
 {
 	protected StatefulView statefulView;
 
@@ -76,8 +79,56 @@ public abstract class StatefulFragment extends Fragment implements ViewStateLayo
 		statefulView.setViewState(state);
 	}
 
+	@NonNull @Override public ViewState getViewState()
+	{
+		return statefulView.getViewState();
+	}
+
 	@Override public ViewState provideInitialViewState()
 	{
 		return ViewState.EMPTY;
+	}
+
+	@Override public void onResume()
+	{
+		super.onResume();
+
+		if (shouldReloadOnResume())
+		{
+			setViewState(ViewState.LOADING);
+			getListData(this);
+		}
+	}
+
+	/**
+	 * Whether or not content should be reloaded when the view is resumed
+	 *
+	 * @return true to reload content on resume, false to not reload content
+	 */
+	protected boolean shouldReloadOnResume()
+	{
+		return true;
+	}
+
+	/**
+	 * Get the data that will be displayed in the list
+	 */
+	protected abstract void getListData(@NonNull ListingData callback);
+
+	@Override public void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items)
+	{
+		if (items.isEmpty())
+		{
+			setViewState(ViewState.EMPTY);
+		}
+		else
+		{
+			setViewState(ViewState.LOADED);
+		}
+	}
+
+	@Override public void onListingDataError(@Nullable Throwable throwable)
+	{
+		setViewState(ViewState.ERROR);
 	}
 }

@@ -15,4 +15,11 @@ public interface ViewStateChange
 	 * @param state which it is transitioning to
 	 */
 	void setViewState(@NonNull ViewState state);
+
+	/**
+	 * Gets the current view state
+	 *
+	 * @return state it is currently in
+	 */
+	@NonNull ViewState getViewState();
 }

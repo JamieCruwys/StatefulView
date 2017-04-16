@@ -107,4 +107,19 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 	{
 		setDisplayedChild(state.getPosition());
 	}
+
+	@NonNull @Override public ViewState getViewState()
+	{
+		int currentStatePosition = getDisplayedChild();
+
+		for (ViewState state : ViewState.values())
+		{
+			if (state.getPosition() == currentStatePosition)
+			{
+				return state;
+			}
+		}
+
+		return ViewState.ERROR;
+	}
 }

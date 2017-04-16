@@ -18,7 +18,7 @@ import uk.co.jamiecruwys.statefulview.R;
 /**
  * Created by Jamie Cruwys of 3 SIDED CUBE on 10/04/2017.
  */
-public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment implements ListingData<ITEM_TYPE>
+public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment<ITEM_TYPE>
 {
 	private RecyclerView recycler;
 	private RecyclerView.Adapter adapter;
@@ -83,49 +83,14 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 		return null;
 	}
 
-	@Override public void onResume()
-	{
-		super.onResume();
-
-		if (shouldReloadOnResume())
-		{
-			setViewState(ViewState.LOADING);
-			getListData(this);
-		}
-	}
-
-	/**
-	 * Whether or not content should be reloaded when the view is resumed
-	 *
-	 * @return true to reload content on resume, false to not reload content
-	 */
-	protected boolean shouldReloadOnResume()
-	{
-		return true;
-	}
-
-	/**
-	 * Get the data that will be displayed in the list
-	 */
-	protected abstract void getListData(@NonNull ListingData callback);
-
 	@Override public void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items)
 	{
-		if (items.isEmpty())
-		{
-			setViewState(ViewState.EMPTY);
-		}
-		else
+		super.onListingDataRetrieved(items);
+
+		if (getViewState() == ViewState.LOADED)
 		{
 			adapter = provideAdapter(items);
 			recycler.swapAdapter(adapter, false);
-
-			setViewState(ViewState.LOADED);
 		}
-	}
-
-	@Override public void onListingDataError(@Nullable Throwable throwable)
-	{
-		setViewState(ViewState.ERROR);
 	}
 }

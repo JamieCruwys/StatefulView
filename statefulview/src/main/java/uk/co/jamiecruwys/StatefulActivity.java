@@ -65,6 +65,11 @@ public abstract class StatefulActivity extends AppCompatActivity implements View
 		statefulView.setViewState(state);
 	}
 
+	@NonNull @Override public ViewState getViewState()
+	{
+		return statefulView.getViewState();
+	}
+
 	@Override public ViewState provideInitialViewState()
 	{
 		return ViewState.EMPTY;
