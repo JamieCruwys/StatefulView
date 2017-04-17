@@ -20,8 +20,8 @@ import uk.co.jamiecruwys.statefulview.R;
  */
 public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment<ITEM_TYPE>
 {
-	private RecyclerView recycler;
-	private RecyclerView.Adapter adapter;
+	protected RecyclerView recycler;
+	protected RecyclerView.Adapter adapter;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
