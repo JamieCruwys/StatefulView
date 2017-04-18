@@ -35,15 +35,15 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 		if (savedInstanceState == null)
 		{
-			refresh();
+			refresh(Collections.EMPTY_LIST);
 		}
 	}
 
-	public void refresh()
+	public void refresh(@NonNull List<ITEM_TYPE> items)
 	{
 		recycler.setLayoutManager(provideLayoutManager());
 
-		adapter = provideAdapter(Collections.EMPTY_LIST);
+		adapter = provideAdapter(items);
 		recycler.setAdapter(adapter);
 
 		RecyclerView.ItemDecoration itemDecoration = provideItemDecoration();
