@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import java.util.Collections;
 import java.util.List;
 
-import uk.co.jamiecruwys.contracts.ListingData;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
@@ -36,16 +35,21 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 		if (savedInstanceState == null)
 		{
-			recycler.setLayoutManager(provideLayoutManager());
+			refresh();
+		}
+	}
 
-			adapter = provideAdapter(Collections.EMPTY_LIST);
-			recycler.setAdapter(adapter);
+	public void refresh()
+	{
+		recycler.setLayoutManager(provideLayoutManager());
 
-			RecyclerView.ItemDecoration itemDecoration = provideItemDecoration();
-			if (itemDecoration != null)
-			{
-				recycler.addItemDecoration(itemDecoration);
-			}
+		adapter = provideAdapter(Collections.EMPTY_LIST);
+		recycler.setAdapter(adapter);
+
+		RecyclerView.ItemDecoration itemDecoration = provideItemDecoration();
+		if (itemDecoration != null)
+		{
+			recycler.addItemDecoration(itemDecoration);
 		}
 	}
 
