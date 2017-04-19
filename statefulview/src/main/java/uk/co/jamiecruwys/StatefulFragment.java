@@ -1,10 +1,9 @@
 package uk.co.jamiecruwys;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +32,10 @@ public abstract class StatefulFragment<ITEM_TYPE> extends Fragment implements Vi
 		View view = inflater.inflate(provideLayout(), container, false);
 		statefulView = (StatefulView)view.findViewById(provideStatefulViewId());
 
-		Context context = statefulView.getContext();
-
-		statefulView.setStateLayout(context, provideLoadingLayout(), ViewState.LOADING);
-		statefulView.setStateLayout(context, provideEmptyLayout(), ViewState.EMPTY);
-		statefulView.setStateLayout(context, provideLoadedLayout(), ViewState.LOADED);
-		statefulView.setStateLayout(context, provideErrorLayout(), ViewState.ERROR);
+		statefulView.setStateLayout(getContext(), provideLoadingLayout(), ViewState.LOADING);
+		statefulView.setStateLayout(getContext(), provideEmptyLayout(), ViewState.EMPTY);
+		statefulView.setStateLayout(getContext(), provideLoadedLayout(), ViewState.LOADED);
+		statefulView.setStateLayout(getContext(), provideErrorLayout(), ViewState.ERROR);
 
 		return view;
 	}

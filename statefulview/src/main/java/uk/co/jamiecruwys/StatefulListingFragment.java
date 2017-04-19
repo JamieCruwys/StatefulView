@@ -65,7 +65,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 	 */
 	@NonNull protected RecyclerView.LayoutManager provideLayoutManager()
 	{
-		return new LinearLayoutManager(recycler.getContext());
+		return new LinearLayoutManager(getContext());
 	}
 
 	/**
