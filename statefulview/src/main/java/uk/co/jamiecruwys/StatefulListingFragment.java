@@ -111,7 +111,21 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	@Override public void onSaveInstanceState(Bundle outState)
 	{
-		outState.putParcelable(SAVED_LAYOUT_MANAGER, recycler.getLayoutManager().onSaveInstanceState());
+		if (recycler != null)
+		{
+			RecyclerView.LayoutManager layoutManager = recycler.getLayoutManager();
+
+			if (layoutManager != null)
+			{
+				Parcelable layoutManagerState = layoutManager.onSaveInstanceState();
+
+				if (layoutManagerState != null)
+				{
+					outState.putParcelable(SAVED_LAYOUT_MANAGER, layoutManagerState);
+				}
+			}
+		}
+
 		super.onSaveInstanceState(outState);
 	}
 }
