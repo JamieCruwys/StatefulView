@@ -25,6 +25,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 	protected RecyclerView recycler;
 	protected RecyclerView.Adapter adapter;
 	private Parcelable savedLayoutManager;
+	private boolean restoredState = false;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -43,6 +44,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 		}
 		else
 		{
+			restoredState = false;
 			savedLayoutManager = savedInstanceState.getParcelable(SAVED_LAYOUT_MANAGER);
 		}
 	}
@@ -60,7 +62,11 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 			recycler.addItemDecoration(itemDecoration);
 		}
 
-		recycler.getLayoutManager().onRestoreInstanceState(savedLayoutManager);
+		if (!restoredState)
+		{
+			recycler.getLayoutManager().onRestoreInstanceState(savedLayoutManager);
+			restoredState = true;
+		}
 	}
 
 	@Override public int provideLoadedLayout()
