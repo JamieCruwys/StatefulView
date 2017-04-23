@@ -1,6 +1,7 @@
 package uk.co.jamiecruwys;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,21 +20,18 @@ import uk.co.jamiecruwys.statefulview.R;
  */
 public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment<ITEM_TYPE>
 {
-	private static final String ARG_SCROLL_POSITION = "adapter_position";
+	private static final String SAVED_LAYOUT_MANAGER = "saved_layout_manager";
 
 	protected RecyclerView recycler;
 	protected RecyclerView.Adapter adapter;
-	private int scrollPosition = 0;
+	private Parcelable savedLayoutManager;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		recycler = (RecyclerView)view.findViewById(R.id.recycler);
 
-		if (savedInstanceState != null)
-		{
-			scrollPosition = savedInstanceState.getInt(ARG_SCROLL_POSITION, 0);
-		}
+		savedLayoutManager = savedInstanceState.getParcelable(SAVED_LAYOUT_MANAGER);
 
 		return view;
 	}
@@ -61,7 +59,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 			recycler.addItemDecoration(itemDecoration);
 		}
 
-		recycler.scrollToPosition(scrollPosition);
+		recycler.getLayoutManager().onRestoreInstanceState(savedLayoutManager);
 	}
 
 	@Override public int provideLoadedLayout()
@@ -112,10 +110,7 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	@Override public void onSaveInstanceState(Bundle outState)
 	{
-		LinearLayoutManager layoutManager = (LinearLayoutManager)recycler.getLayoutManager();
-		int adapterPosition = layoutManager.findFirstVisibleItemPosition();
-
-		outState.putInt(ARG_SCROLL_POSITION, adapterPosition);
+		outState.putParcelable(SAVED_LAYOUT_MANAGER, recycler.getLayoutManager().onSaveInstanceState());
 		super.onSaveInstanceState(outState);
 	}
 }
