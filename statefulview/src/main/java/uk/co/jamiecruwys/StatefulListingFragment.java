@@ -19,13 +19,22 @@ import uk.co.jamiecruwys.statefulview.R;
  */
 public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment<ITEM_TYPE>
 {
+	private static final String ARG_SCROLL_POSITION = "adapter_position";
+
 	protected RecyclerView recycler;
 	protected RecyclerView.Adapter adapter;
+	private int scrollPosition = 0;
 
 	@Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		recycler = (RecyclerView)view.findViewById(R.id.recycler);
+
+		if (savedInstanceState != null)
+		{
+			scrollPosition = savedInstanceState.getInt(ARG_SCROLL_POSITION, 0);
+		}
+
 		return view;
 	}
 
@@ -51,6 +60,8 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 		{
 			recycler.addItemDecoration(itemDecoration);
 		}
+
+		recycler.scrollToPosition(scrollPosition);
 	}
 
 	@Override public int provideLoadedLayout()
@@ -89,12 +100,22 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 
 	@Override public void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items)
 	{
-		super.onListingDataRetrieved(items);
-
-		if (getViewState() == ViewState.LOADED)
+		// Do not continue if the fragment is detached from an activity
+		if (!isAdded() || getActivity() == null)
 		{
-			adapter = provideAdapter(items);
-			recycler.swapAdapter(adapter, false);
+			return;
 		}
+
+		super.onListingDataRetrieved(items);
+		refresh(items);
+	}
+
+	@Override public void onSaveInstanceState(Bundle outState)
+	{
+		LinearLayoutManager layoutManager = (LinearLayoutManager)recycler.getLayoutManager();
+		int adapterPosition = layoutManager.findFirstVisibleItemPosition();
+
+		outState.putInt(ARG_SCROLL_POSITION, adapterPosition);
+		super.onSaveInstanceState(outState);
 	}
 }
