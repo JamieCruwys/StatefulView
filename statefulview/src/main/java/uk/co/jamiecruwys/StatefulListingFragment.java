@@ -30,9 +30,6 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 	{
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		recycler = (RecyclerView)view.findViewById(R.id.recycler);
-
-		savedLayoutManager = savedInstanceState.getParcelable(SAVED_LAYOUT_MANAGER);
-
 		return view;
 	}
 
@@ -43,6 +40,10 @@ public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragmen
 		if (savedInstanceState == null)
 		{
 			refresh(Collections.EMPTY_LIST);
+		}
+		else
+		{
+			savedLayoutManager = savedInstanceState.getParcelable(SAVED_LAYOUT_MANAGER);
 		}
 	}
 
