@@ -117,6 +117,12 @@ public abstract class StatefulFragment<ITEM_TYPE> extends Fragment implements Vi
 
 	@Override public void onListingDataRetrieved(@NonNull List<ITEM_TYPE> items)
 	{
+		// Do not continue if the fragment is detached from an activity
+		if (!isAdded() || getActivity() == null)
+		{
+			return;
+		}
+
 		if (items.isEmpty())
 		{
 			setViewState(ViewState.EMPTY);
@@ -129,6 +135,12 @@ public abstract class StatefulFragment<ITEM_TYPE> extends Fragment implements Vi
 
 	@Override public void onListingDataError(@Nullable Throwable throwable)
 	{
+		// Do not continue if the fragment is detached from an activity
+		if (!isAdded() || getActivity() == null)
+		{
+			return;
+		}
+
 		setViewState(ViewState.ERROR);
 	}
 }
