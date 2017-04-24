@@ -13,10 +13,30 @@ import android.view.ViewGroup;
 import java.util.Collections;
 import java.util.List;
 
+import uk.co.jamiecruwys.contracts.ListingData;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
- * Created by Jamie Cruwys of 3 SIDED CUBE on 10/04/2017.
+ * Fragment that lists data and takes care of all of the various states the view can be in. To use you must:
+ *
+ * <ol>
+ *     <li>Provide your loading layout using {@link #provideLoadingLayout()}</li>
+ *     <li>Provide your empty layout using {@link #provideEmptyLayout()}</li>
+ *     <li>Provide your error layout using {@link #provideErrorLayout()}</li>
+ *     <li>Get your list data in {@link #getListData(ListingData)} and call {@link ListingData}'s interface when the data comes back</li>
+ *     <li>Provide your adapter for the data in ({@link #provideAdapter(List)})</li>
+ * </ol>
+ *
+ * Optionally provide:
+ *
+ * <ul>
+ *    <li>Your own {@link android.support.v7.widget.RecyclerView.LayoutManager} by overriding {@link #provideLayoutManager()}. The default implementation is a vertical {@link LinearLayoutManager}.</li>
+ *    <li>Your own {@link android.support.v7.widget.RecyclerView.ItemDecoration} by overrding {@link #provideItemDecoration()}.</li>
+ * </ul>
+ *
+ * <em>This will also save and restore your {@link android.support.v7.widget.RecyclerView.LayoutManager}'s view state.</em>
+ *
+ * @param <ITEM_TYPE> the model class that you want to display in the list
  */
 public abstract class StatefulListingFragment<ITEM_TYPE> extends StatefulFragment<ITEM_TYPE>
 {

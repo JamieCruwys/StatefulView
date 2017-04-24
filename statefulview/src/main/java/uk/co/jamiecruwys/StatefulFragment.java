@@ -18,8 +18,39 @@ import uk.co.jamiecruwys.contracts.ViewStateRootLayout;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
- * A fragment that contains a {@link StatefulView}
+ * Fragment wrapper for a {@link StatefulView}. To use you must:
+ *
+ * <ol>
+ *     <li>Provide your loading layout using {@link #provideLoadingLayout()}</li>
+ *     <li>Provide your empty layout using {@link #provideEmptyLayout()}</li>
+ *     <li>Provide your loaded layout using {@link #provideLoadedLayout()} ()}</li>
+ *     <li>Provide your error layout using {@link #provideErrorLayout()}</li>
+ *     <li>Get your list data in {@link #getListData(ListingData)} and call {@link ListingData}'s interface when the data comes back</li>
+ * </ol>
+ *
+ * Optionally provide:
+ *
+ * <ul>
+ *     <li>Your own root layout by overriding {@link #provideLayout()}. This must contain a {@link StatefulView}. If you implement this method, you must also implement {@link #provideStatefulViewId()}.</li>
+ *     <li>If you are implementing {@link #provideLayout()}, then you must implement this to provide the layout id of the {@link StatefulView} that is in your view.</li>
+ *     <li>An initial {@link ViewState} by overriding {@link #provideInitialViewState()}. The default is {@link ViewState#EMPTY}.</li>
+ *     <li>Whether or not to reload the data when {@link #onResume()} is called. This can be achieved by overriding {@link #shouldReloadOnResume()} and returning true or false.</li>
+ * </ul>
+ *
+ * Methods you can call:
+ *
+ * <ul>
+ *     <li>{@link #setViewState(ViewState)} to change the current {@link ViewState}</li>
+ *     <li>{@link #getViewState()} to get the current {@link ViewState}</li>
+ * </ul>
+ *
+ * @param <ITEM_TYPE> the model class that you want to display
  */
+
+// TODO: Rename getlistdata
+// TODO: merge providelayout and statefulviewid
+// TODO: Refactor + document StatefulFragment, StatefulActivity + contracts
+
 public abstract class StatefulFragment<ITEM_TYPE> extends Fragment implements ViewStateLayouts, ViewStateRootLayout, ViewStateChange, InitialViewState, ListingData<ITEM_TYPE>
 {
 	protected StatefulView statefulView;
