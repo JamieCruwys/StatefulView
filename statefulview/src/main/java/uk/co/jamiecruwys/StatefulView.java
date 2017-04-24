@@ -13,8 +13,13 @@ import uk.co.jamiecruwys.contracts.ViewStateChange;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
- * A view that removes the need to show/hide views in order to
- * change between view states such as loading, loaded, empty and error.
+ * A {@link ViewFlipper} that shows a single {@link ViewState}'s layout at any given time. You can:
+ *
+ * <ul>
+ *     <li>Call {@link #setViewState(ViewState)} to update the {@link ViewState} and show its accompanying layout.</li>
+ *     <li>Get the current {@link ViewState} using {@link #getViewState()}</li>
+ *     <li>Manually set a layout for a view state using {@link #setStateLayout(Context, int, ViewState)}. You shouldn't need to do this.</li>
+ * </ul>
  */
 public class StatefulView extends ViewFlipper implements ViewStateChange
 {
@@ -37,6 +42,44 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 		{
 			attemptLayoutInflation(context, R.layout.stateful_stub, this, state);
 		}
+	}
+
+	/**
+	 * Try and inflate the view for the given state
+	 *
+	 * @param context necessary to inflate the layout
+	 * @param layout to inflate
+	 * @param root view
+	 * @param state the layout is for
+	 */
+	private void attemptLayoutInflation(@NonNull Context context, @LayoutRes int layout, @NonNull ViewGroup root, @NonNull ViewState state)
+	{
+		resetViewStateLayout(root);
+
+		try
+		{
+			inflate(context, layout, root);
+		}
+		catch (Resources.NotFoundException e)
+		{
+			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getAttributeName() + " set");
+		}
+	}
+
+	/**
+	 * Resets the layout for this {@link ViewState}'s view stub
+	 *
+	 * @param viewGroup
+	 */
+	private void resetViewStateLayout(@NonNull ViewGroup viewGroup)
+	{
+		if (viewGroup == this)
+		{
+			// We have been given the StatefulView view instead of the StatefulView view stub
+			return;
+		}
+
+		viewGroup.removeAllViews();
 	}
 
 	/**
@@ -66,36 +109,19 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 	{
 		if (layout != DEFAULT_LAYOUT_VALUE)
 		{
-			attemptLayoutInflation(context, layout, (ViewGroup)getChildAt(state.getPosition()), state);
+			attemptLayoutInflation(context, layout, getViewStub(state), state);
 		}
 	}
 
 	/**
-	 * Try and inflate the view for the given state
+	 * Gets the view stub for a given {@link ViewState}
 	 *
-	 * @param context necessary to inflate the layout
-	 * @param layout to inflate
-	 * @param root view
-	 * @param state the layout is for
+	 * @param state to get the view stub for
+	 * @return {@link ViewGroup} view stub for the given {@link ViewState}
 	 */
-	private void attemptLayoutInflation(@NonNull Context context, @LayoutRes int layout, @NonNull ViewGroup root, @NonNull ViewState state)
+	private ViewGroup getViewStub(@NonNull ViewState state)
 	{
-		boolean inViewStub = root != this;
-
-		// Clear all of the views for this layout's state. Do nothing if we are inflating the initial stub layouts.
-		if (inViewStub)
-		{
-			root.removeAllViews();
-		}
-
-		try
-		{
-			inflate(context, layout, root);
-		}
-		catch (Resources.NotFoundException e)
-		{
-			throw new RuntimeException(StatefulView.class.getSimpleName() + " must have custom attribute " + state.getAttributeName() + " set");
-		}
+		return (ViewGroup)getChildAt(state.getPosition());
 	}
 
 	/**
@@ -108,6 +134,11 @@ public class StatefulView extends ViewFlipper implements ViewStateChange
 		setDisplayedChild(state.getPosition());
 	}
 
+	/**
+	 * Gets the current {@link ViewState}
+	 *
+	 * @return current {@link ViewState} or {@link ViewState#ERROR}
+	 */
 	@NonNull @Override public ViewState getViewState()
 	{
 		int currentStatePosition = getDisplayedChild();
