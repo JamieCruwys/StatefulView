@@ -7,7 +7,14 @@ import android.support.annotation.StyleableRes;
 import uk.co.jamiecruwys.statefulview.R;
 
 /**
- * The different states a view can be in
+ * The different states a view can be in, which are:
+ *
+ * <ul>
+ *     <li>{@link #LOADING}</li>
+ *     <li>{@link #EMPTY}</li>
+ *     <li>{@link #LOADED}</li>
+ *     <li>{@link #ERROR}</li>
+ * </ul>
  */
 public enum ViewState
 {
